@@ -3,6 +3,9 @@ import datetime
 import requests
 import os
 
+# Change this when you want to add new data (can be in minutes)
+NO_OF_MINUTES = 100
+
 # Data
 USERNAME = 'johnivanpuayap'
 USER_TOKEN = os.environ['PIXELA_TOKEN']
@@ -46,7 +49,7 @@ date_today = datetime.datetime.now().strftime("%Y%m%d")
 
 post_parameters = {
     "date": date_today,
-    "quantity": "1",
+    "quantity": f"{NO_OF_MINUTES/60}",
 }
 
 response = requests.post(url=POST_ENDPOINT, headers=headers, json=post_parameters)
