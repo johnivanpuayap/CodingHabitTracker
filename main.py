@@ -8,7 +8,6 @@ USER_TOKEN = os.environ['PIXELA_TOKEN']
 GRAPH_ID = 'codingtracker'
 
 # Data
-NO_OF_MINUTES = 0
 DATE_TODAY = datetime.datetime.now().strftime("%Y%m%d")
 
 PIXELA_ENDPOINT = 'https://pixe.la/v1/users'
@@ -48,23 +47,23 @@ def create_graph():
     print(response.text)
 
 
-def post_pixel():
+def post_pixel(minutes):
     # Post a Pixel in a Graph
-
+    hours = minutes/60
     post_parameters = {
         "date": DATE_TODAY,
-        "quantity": f"{NO_OF_MINUTES / 60}",
+        "quantity": f"{hours}",
     }
 
     response = requests.post(url=POST_ENDPOINT, headers=headers, json=post_parameters)
 
     if response.json()['isSuccess']:
-        print(f"Added{NO_OF_MINUTES / 60: .2f} hours today")
+        print(f"Added{hours: .2f} hours today")
 
 
-def update_pixel():
+def update_pixel(minutes):
     update_parameters = {
-        "quantity": f"{NO_OF_MINUTES / 60}"
+        "quantity": f"{minutes}"
     }
 
     response = requests.put(url=UPDATE_ENDPOINT, headers=headers, json=update_parameters)
@@ -77,5 +76,5 @@ def delete_pixel():
 
 
 print(f"Welcome, {USERNAME}")
-NO_OF_MINUTES = int(input("How many minutes did you code today?: "))
-post_pixel()
+mins = int(input("How many minutes did you code today?: "))
+post_pixel(mins)
