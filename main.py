@@ -9,12 +9,13 @@ NO_OF_MINUTES = 200
 USERNAME = 'johnivanpuayap'
 USER_TOKEN = os.environ['PIXELA_TOKEN']
 DATE_TODAY = datetime.datetime.now().strftime("%Y%m%d")
-GRAPH_ID = ''
+GRAPH_ID = 'graph1'
 
 PIXELA_ENDPOINT = 'https://pixe.la/v1/users'
 GRAPH_ENDPOINT = f"{PIXELA_ENDPOINT}/{USERNAME}/graphs"
 POST_ENDPOINT = f"{GRAPH_ENDPOINT}/{GRAPH_ID}"
 UPDATE_ENDPOINT = f"{POST_ENDPOINT}/{DATE_TODAY}"
+DELETE_ENDPOINT = UPDATE_ENDPOINT
 
 create_user_parameters = {
     "token": USER_TOKEN,
@@ -66,3 +67,7 @@ headers = {
 # }
 #
 # response = requests.put(url=UPDATE_ENDPOINT, headers=headers, json=update_parameters)
+
+# Delete a Pixel
+response = requests.delete(url=DELETE_ENDPOINT, headers=headers)
+print(response.text)
