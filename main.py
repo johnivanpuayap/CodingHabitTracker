@@ -36,6 +36,18 @@ headers = {
     "X-USER-TOKEN": USER_TOKEN
 }
 
-response = requests.post(url=GRAPH_ENDPOINT, headers=headers, json=graph_parameters)
-print(response.text)
+# response = requests.post(url=GRAPH_ENDPOINT, headers=headers, json=graph_parameters)
+# print(response.text)
 
+# Post a Pixel in a Graph
+POST_ENDPOINT = f"{GRAPH_ENDPOINT}/{GRAPH_ID}"
+
+date_today = datetime.datetime.now().strftime("%Y%m%d")
+
+post_parameters = {
+    "date": date_today,
+    "quantity": "1",
+}
+
+response = requests.post(url=POST_ENDPOINT, headers=headers, json=post_parameters)
+print(response.text)
